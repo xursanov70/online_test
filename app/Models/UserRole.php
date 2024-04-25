@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Organization extends Model
+class UserRole extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'organization_name',
-        'owner_name',
-        'rent',
-        'rent_expire_date',
+        'user_id',
+        'role_id',
     ];
 }

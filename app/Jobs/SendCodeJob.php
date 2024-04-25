@@ -29,6 +29,6 @@ class SendCodeJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->code->email)->send(new SendCodeMail($this->code->rand));
+        Mail::to($this->code['email'])->send(new SendCodeMail($this->code['code']));
     }
 }

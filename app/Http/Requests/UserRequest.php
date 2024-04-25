@@ -24,10 +24,10 @@ class UserRequest extends FormRequest
     {
         return [
             "username" => "required|max:30|min:2|regex:/^[A-Za-z0-9\-_]+$/|unique:users,username,except,id",
-            "password" => "required|min:6|max:30",
+            "password" => "required|min:6|max:50",
             "full_name" => "required|max:50|min:2",
             "phone" => "required|string|size:17|starts_with:+998|unique:users,phone,except,id",
-            "email" => "required|max:50|unique:users,email,except,id",
+            "email" => "required|max:100|unique:users,email,except,id",
         ];
     }
 

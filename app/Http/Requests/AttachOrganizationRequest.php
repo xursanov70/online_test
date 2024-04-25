@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AttachTeacherRequest extends FormRequest
+class AttachOrganizationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,6 @@ class AttachTeacherRequest extends FormRequest
     {
         return [
             "user_id" => "required|integer",
-            "subject_type_id" => "required|integer",
-            "degree" => "required|in:high,medium,low",
         ];
     }
 
@@ -33,12 +31,6 @@ class AttachTeacherRequest extends FormRequest
         return [
             "user_id.required" => "user_id kiriting",
             "user_id.integer" => "user_id integer holatida  kiriting",  
-
-            "subject_type_id.required" => "subject_type_id kiriting",
-            "subject_type_id.integer" => "subject_type_id integer holatida  kiriting",  
-
-            "degree.required" => "O'qituvchi darajasini kiriting",
-            "degree.in" => "O'qituvchi darajasini tp'g'ri kiriting", 
         ];
     }
 }

@@ -23,7 +23,7 @@ class LoginRequest extends FormRequest
     {
         return [
             "username" => "required|max:30|min:2|regex:/^[A-Za-z0-9\-_]+$/",
-            "password" => "required|min:6|max:30",
+            "password" => "required|min:5|max:50",
         ];
     }
 

@@ -13,16 +13,15 @@ use App\Models\ConfirmCode;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
     public function sendCode(SendCodeRequest $request)
     {
         try {
-
             $rand = rand(10000, 99999);
             
             $code = ConfirmCode::create([
@@ -68,9 +67,11 @@ class UserController extends Controller
         }
     }
 
-    public function userRegister(UserRequest $request)
+    public function userRegister(UserRequest $request, string $locale)
     {
         try {
+
+            App::setLocale($locale);
             $code = ConfirmCode::where('email', $request->email)
                 ->where('active', true)
                 ->orderBy('id', 'desc')->first();
@@ -129,5 +130,20 @@ class UserController extends Controller
     public function myProfile()
     {
         return Auth::user();
+    }
+
+    public function searchUser(){
+        $search = request('search');
+
+        // App::setLocale($locale);
+
+        return User::when($search, function($query) use ($search){
+            $query->where('username', 'like', "%$search%")
+            ->orWhere('full_name', 'like', "%$search%")
+            ->orWhere('phone', 'like', "%$search%")
+            ->orWhere('email', 'like', "%$search%");
+        })
+        ->orderBy('users.id', 'asc')
+        ->paginate(15);
     }
 }

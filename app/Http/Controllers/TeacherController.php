@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AttachTeacherRequest;
 use App\Http\Requests\UpdateAttachTeacherRequest;
 use App\Models\Teacher;
+use App\Models\UserRole;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -34,9 +36,15 @@ class TeacherController extends Controller
 
     public function getTeacher()
     {
-        return  Teacher::select('u.username', 'teachers.subject_type_id', 'teachers.degree', 'subject_types.subject_name')
-            ->join('users as u', 'u.id', '=', 'teachers.user_id')
+        if ($this->can('get', 'teacher') == 'denied'){
+            return response()->json(["message" => "Amaliyotga huquq yo'q"], 403);
+        }
+
+        return  Teacher::select('users.username', 'teachers.degree', 'subject_types.subject_name')
+            ->join('users', 'users.id', '=', 'teachers.user_id')
             ->join('subject_types', 'subject_types.id', '=', 'teachers.subject_type_id')
+            ->where('users.organization_id', Auth::user()->organization_id)
+            ->orderByRaw("FIELD(degree, 'high', 'medium', 'low')")
             ->paginate(15);
     }
 }

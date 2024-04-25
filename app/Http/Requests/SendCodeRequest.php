@@ -22,7 +22,7 @@ class SendCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => "required|max:50|min:7|unique:users,email,except,id",
+            "email" => "required|max:100|min:7|unique:users,email,except,id",
         ];
     }
 

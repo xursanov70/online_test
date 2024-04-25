@@ -23,7 +23,7 @@ class UpdateGroupRequest extends FormRequest
     {
         return [
             "subject_type_id" => "required|integer",
-            "group_name" => "required|string|max:50",
+            "group_name" => "required|string|max:100",
         ];
     }
 

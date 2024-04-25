@@ -23,7 +23,7 @@ class UpdateAttachTeacherRequest extends FormRequest
     {
         return [
             "subject_type_id" => "required|integer",
-            "degree" => "required|in:High,Medium,Low",
+            "degree" => "required|in:high,medium,low",
         ];
     }
 

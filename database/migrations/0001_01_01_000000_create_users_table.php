@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->foreignId('organization_id')->constrained('organizations')->nullable();
-            $table->integer('user_type')->default('1')->comment('foydalanuvchilar turlari: 1=user, 2=developer, 3=owner, 4=teacher');
             $table->boolean('active')->default(true);
             $table->boolean('deleted_is')->default(false);
             $table->timestamps();

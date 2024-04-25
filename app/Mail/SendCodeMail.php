@@ -13,7 +13,8 @@ class SendCodeMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public $rand)
+    public $rand;
+    public function __construct($rand)
     {
         $this->rand = $rand;
     }

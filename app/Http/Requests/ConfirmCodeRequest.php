@@ -23,7 +23,7 @@ class ConfirmCodeRequest extends FormRequest
     {
         return [
             "code" => "required|string|size:5",
-            "email" => "required|max:50",
+            "email" => "required|max:100",
         ];
     }
 

@@ -24,7 +24,7 @@ class GroupRequest extends FormRequest
         return [
             "organization_id" => "required|integer",
             "subject_type_id" => "required|integer",
-            "group_name" => "required|string|max:50",
+            "group_name" => "required|string|max:100",
         ];
     }
 

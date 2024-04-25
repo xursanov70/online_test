@@ -11,13 +11,10 @@ class GroupController extends Controller
 {
     public function createGroup(GroupRequest $request){
         
-        if (Auth::user()->user_type != '4'){
-            return response()->json(["message" => "Amaliyotga huquq  yo'q!"], 403);
-        }
         $group = Group::where('organization_id', $request->organization_id)
         ->where('subject_type_id', $request->subject_type_id)->first();
         if ($group){
-            return response()->json(["message" => "Kiritilgan filialga oldin kiritlgan gurh biriktirmoqdasiz!"], 403);
+            return response()->json(["message" => "Kiritilgan filialga oldin kiritlgan guruh biriktirmoqdasiz!"], 403);
         }
         Group::create([
             'group_name' => $request->group_name,
