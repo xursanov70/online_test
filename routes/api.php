@@ -40,5 +40,6 @@ Route::post('confirm/code', [UserController::class, 'confirmCode']);
         Route::post('update/rent/{organization}', [OrganizationController::class, 'updateRent']);
         Route::post('attach/organization/{organization}', [OrganizationController::class, 'attachOrganization']);
         Route::get('get/organization', [OrganizationController::class, 'getOrganization']);
+        Route::get('my/organization', [OrganizationController::class, 'myOrganization']);
 
 });

@@ -40,6 +40,6 @@ class GroupController extends Controller
         return Group::select('groups.group_name', 'organizations.organization_name', 'subject_types.subject_name')
         ->join('organizations', 'organizations.id', '=', 'groups.organization_id')
         ->join('subject_types', 'subject_types.id', '=', 'groups.subject_type_id')
-        ->paginate();
+        ->paginate(15);
     }
 }

@@ -8,7 +8,6 @@ use App\Http\Requests\SendCodeRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Jobs\SendCodeJob;
-use App\Mail\SendCodeMail;
 use App\Models\ConfirmCode;
 use App\Models\User;
 use Carbon\Carbon;
@@ -67,11 +66,10 @@ class UserController extends Controller
         }
     }
 
-    public function userRegister(UserRequest $request, string $locale)
+    public function userRegister(UserRequest $request)
     {
         try {
 
-            App::setLocale($locale);
             $code = ConfirmCode::where('email', $request->email)
                 ->where('active', true)
                 ->orderBy('id', 'desc')->first();
@@ -146,4 +144,5 @@ class UserController extends Controller
         ->orderBy('users.id', 'asc')
         ->paginate(15);
     }
+
 }

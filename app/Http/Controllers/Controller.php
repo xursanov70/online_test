@@ -12,8 +12,8 @@ abstract class Controller
         ->join('actions', 'roles.action_id', '=', 'actions.id')
         ->join('modules', 'roles.module_id', '=', 'modules.id')
         ->where('user_roles.user_id', Auth::user()->id)
-        ->where('actions.action_name', 'add')
-        ->where('modules.module_name', '=', 'organization')
+        ->where('actions.action_name', $action)
+        ->where('modules.module_name', $module)
         ->first();
 
         if (!$can){

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRentRequest;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class OrganizationController extends Controller
 {
@@ -60,5 +61,17 @@ class OrganizationController extends Controller
         ->paginate(15);
     }
 
+    public function myOrganization(){
 
+        $organization = Organization::where('owner_name', Auth::user()->username)
+        ->where('rent_expire_date', '<=', date('Y-m-d'))
+        ->orderBy('id', 'desc')
+        ->first();
+        Log::error($organization);
+        if (!$organization){
+            return response()->json(["message" => "sizda hozirda faol filial mavjud emas!"], 404);
+        }else{
+            return $organization;
+        }
+    }
 }
